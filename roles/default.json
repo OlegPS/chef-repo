@@ -5,15 +5,6 @@
     "recipe[coollan]"
   ],
   "default_attributes": {
-    "sshd": { 
-      "package": "openssh",
-      "sshd_config": {
-        "PermitRootLogin": "no",
-        "X11Forwarding": "no",
-        "PrintMotd": "no",
-        "PrintLastLog": "no"
-      }
-    }
   },
   "override_attributes": {
   },
