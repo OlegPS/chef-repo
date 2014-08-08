@@ -1,0 +1,22 @@
+{
+  "name": "default",
+  "description": "This is standart role for all CoolLan servers.",
+  "run_list": [
+    "recipe[coollan]"
+  ],
+  "default_attributes": {
+    "sshd": { 
+      "package": "openssh",
+      "sshd_config": {
+        "PermitRootLogin": "no",
+        "X11Forwarding": "no",
+        "PrintMotd": "no",
+        "PrintLastLog": "no"
+      }
+    }
+  },
+  "override_attributes": {
+  },
+  "json_class": "Chef::Role",
+  "chef_type": "role"
+}

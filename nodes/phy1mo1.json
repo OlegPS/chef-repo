@@ -1,0 +1,11 @@
+{
+  "name": "phy1mo1",
+
+  "run_list": [
+    "role[default]"
+  ],
+
+  "automatic": {
+    "ipaddress": "phy1mg1"
+  }
+}
