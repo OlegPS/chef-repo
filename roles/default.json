@@ -5,6 +5,13 @@
     "recipe[coollan]"
   ],
   "default_attributes": {
+    "coollan": {
+      "ssmtp": {
+        "root_alias": "oleg.selin@gmail.com",
+        "mailhub": "phy1mx1:25",
+        "revaliases": []
+      }
+    }
   },
   "override_attributes": {
   },
