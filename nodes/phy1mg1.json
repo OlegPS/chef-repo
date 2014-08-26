@@ -2,7 +2,10 @@
   "name": "phy1mg1",
 
   "run_list": [
-    "role[default]"
+    "role[local_ssmtp]",
+    "role[esxi_vm]",
+    "role[default]",
+    "role[s_webmin]"
   ],
 
   "automatic": {

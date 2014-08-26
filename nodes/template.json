@@ -1,5 +1,7 @@
 {
   "run_list": [
+    "role[local_ssmtp]",
+    "role[esxi_vm]",
     "role[default]"
   ],
   "automatic": {

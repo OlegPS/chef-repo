@@ -7,6 +7,6 @@
 
 template "motd" do
   path "/etc/motd"
-  source "motd.erb"
+  source "motd/motd.erb"
   action :create
 end

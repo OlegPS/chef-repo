@@ -11,7 +11,7 @@ end
 
 template "sshd_config" do
   path "/etc/ssh/sshd_config"
-  source "sshd_config.erb"
+  source "ssh/sshd_config.erb"
 end
 
 service "sshd" do

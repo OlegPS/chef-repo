@@ -11,7 +11,7 @@ end
 
 template "ntp.conf" do
   path "/etc/ntp.conf"
-  source "ntp.conf.erb"
+  source "ntp/ntp.conf.erb"
 end
 
 service "ntpd" do

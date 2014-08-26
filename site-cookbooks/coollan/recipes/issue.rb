@@ -7,6 +7,6 @@
 
 template "issue" do
   path "/etc/issue"
-  source "issue.erb"
+  source "issue/issue.erb"
   action :create
 end

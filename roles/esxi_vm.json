@@ -1,0 +1,13 @@
+{
+  "name": "s_webmin",
+  "description": "This is role for webmin servers.",
+  "run_list": [
+    "recipe[coollan::vmware]"
+  ],
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "json_class": "Chef::Role",
+  "chef_type": "role"
+}

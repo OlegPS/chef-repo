@@ -1,0 +1,11 @@
+{
+  "name": "mail.itmood.ru",
+
+  "run_list": [
+    "role[default]"
+  ],
+
+  "automatic": {
+    "ipaddress": "mail.itmood.ru"
+  }
+}

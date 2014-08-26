@@ -2,10 +2,12 @@
   "name": "phy1fs1",
 
   "run_list": [
+    "role[local_ssmtp]",
+    "role[esxi_vm]",
     "role[default]"
   ],
 
   "automatic": {
-    "ipaddress": "phy1mg1"
+    "ipaddress": "phy1fs1"
   }
 }

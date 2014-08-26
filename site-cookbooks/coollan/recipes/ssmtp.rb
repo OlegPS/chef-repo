@@ -11,12 +11,12 @@ end
 
 template "ssmtp.conf" do
   path "/etc/ssmtp/ssmtp.conf"
-  source "ssmtp.conf.erb"
+  source "ssmtp/ssmtp.conf.erb"
 end
 
 template "revaliases" do
   path "/etc/ssmtp/revaliases"
-  source "revaliases.erb"
+  source "ssmtp/revaliases.erb"
   variables ({
      "revaliases" => node["coollan"]["ssmtp"]["revaliases"]
   })
