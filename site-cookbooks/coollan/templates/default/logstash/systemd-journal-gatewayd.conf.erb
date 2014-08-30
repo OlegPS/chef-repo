@@ -1,0 +1,29 @@
+input {
+<% node["coollan"]["logstash"]["collect_from"].each do | target | %>
+  exec {
+    command => 'cursor=`curl -f -s "http://<%= node["coollan"]["logstash"]["elasticsearch_host"] %>:9200/logstash-$(date +%Y.%m.%d)/_search?pretty=true&size=1&sort=@timestamp:desc&fields=__CURSOR"|grep "__CURSOR"|sed "s/^.*\"\(s=[^\"]*\)\".*$/\1/"`;\
+      [ $cursor"X" = "X" ]\
+        &&curl -f -s -H"Accept: application/json" -H"Range: entries=:999999:1" "http://<%= target %>:19531/entries?boot"\
+        ||curl -f -s -H"Accept: application/json" -H"Range: entries=$cursor" "http://<%= target %>:19531/entries?boot"|tail -n+2'
+    type => "<%= target %>"
+    interval => <%= node["coollan"]["logstash"]["collect_interval"] %>
+    codec => json_lines
+  }
+<% end %>
+}
+
+filter {
+  mutate {
+    gsub => [ "__REALTIME_TIMESTAMP", ".{3,3}$", "" ]
+  }
+  date {
+    timezone => "<%= node["coollan"]["logstash"]["collect_timezone"] %>"
+    match => [ "__REALTIME_TIMESTAMP", "UNIX_MS" ]
+  }
+}
+
+output {
+  elasticsearch {
+    host => "<%= node["coollan"]["logstash"]["elasticsearch_host"] %>"
+  }
+}

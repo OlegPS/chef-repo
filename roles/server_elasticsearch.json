@@ -1,0 +1,17 @@
+{
+  "name": "server_elasticsearch",
+  "description": "This is role for elasticsearch server.",
+  "run_list": [
+    "recipe[coollan::server_elasticsearch]"
+  ],
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "coollan": {
+      "elasticsearch": {
+      }
+    }
+  },
+  "json_class": "Chef::Role",
+  "chef_type": "role"
+}

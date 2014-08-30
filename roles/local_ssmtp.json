@@ -1,6 +1,6 @@
 {
   "name": "s_webmin",
-  "description": "This is role for webmin servers.",
+  "description": "This is role for configuring SMTP in local domain.",
   "run_list": [
     "recipe[coollan::ssmtp]"
   ],
@@ -8,7 +8,7 @@
     "coollan": {
       "ssmtp": {
         "root_alias": "oleg.selin@gmail.com",
-        "mailhub": "phy1mx1:25",
+        "mailhub": "smtp.local:25",
         "revaliases": []
       }
     }

@@ -5,7 +5,7 @@
     "role[local_ssmtp]",
     "role[esxi_vm]",
     "role[default]",
-    "role[s_webmin]"
+    "role[server_webmin]"
   ],
 
   "automatic": {

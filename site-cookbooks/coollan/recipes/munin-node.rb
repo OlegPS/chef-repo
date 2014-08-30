@@ -14,6 +14,7 @@ end
 template "munin-node.conf" do
   path "/etc/munin/munin-node.conf"
   source "munin-node/munin-node.conf.erb"
+  notifies :restart, "service[munin-node]", :delayed
 end
 
 # Plugins config

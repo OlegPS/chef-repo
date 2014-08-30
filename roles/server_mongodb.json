@@ -1,0 +1,22 @@
+{
+  "name": "server_mongodb",
+  "description": "This is role for mongodb server.",
+  "run_list": [
+    "recipe[coollan::server_mongodb]"
+  ],
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "coollan": {
+      "mongodb": {
+        "bind_ip": "127.0.0.1",
+	"syslog": "true",
+	"quiet": "true",
+	"dbpath": "/home/mongodb",
+        "smallfiles": "true"
+      }
+    }
+  },
+  "json_class": "Chef::Role",
+  "chef_type": "role"
+}

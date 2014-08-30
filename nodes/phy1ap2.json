@@ -1,14 +1,11 @@
 {
-  "name": "phy1db2",
-
   "run_list": [
     "role[local_ssmtp]",
     "role[esxi_vm]",
     "role[default]",
-    "role[server_mongodb]"
+    "role[elasticsearch]"
   ],
-
   "automatic": {
-    "ipaddress": "phy1db2"
+    "ipaddress": "phy1ap2"
   }
 }

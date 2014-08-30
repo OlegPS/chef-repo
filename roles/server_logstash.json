@@ -1,0 +1,32 @@
+{
+  "name": "server_logstash",
+  "description": "This is role for logstash server.",
+  "run_list": [
+    "recipe[coollan::server_logstash]"
+  ],
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "coollan": {
+      "logstash": {
+        "elasticsearch_host": "phy1ap2.local",
+	"collect_interval": "180",
+	"collect_from": [ 
+          "phy1ap2",
+          "phy1ap3",
+          "phy1db1",
+          "phy1db2",
+          "phy1fs1",
+          "phy1mg1",
+          "phy1mo1",
+          "phy1mx1",
+          "phy1px1",
+          "phy1we1"
+        ],
+	"collect_timezone": "Europe/Moscow"
+      }
+    }
+  },
+  "json_class": "Chef::Role",
+  "chef_type": "role"
+}

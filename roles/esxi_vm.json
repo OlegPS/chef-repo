@@ -1,6 +1,6 @@
 {
-  "name": "s_webmin",
-  "description": "This is role for webmin servers.",
+  "name": "esxi_vm",
+  "description": "This is role for ESXi virtual machines.",
   "run_list": [
     "recipe[coollan::vmware]"
   ],
