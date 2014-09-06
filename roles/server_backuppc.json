@@ -1,0 +1,22 @@
+{
+  "name": "server_logstash",
+  "description": "This is role for backuppc server.",
+  "run_list": [
+    "recipe[coollan::server_backuppc]"
+  ],
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "coollan": {
+      "backuppc": {
+        "users": [
+          {"admin": "75NEKye2eO3M2"}
+        ],
+        "admin_user_group": "root",
+	"admin_users": "admin"
+      }
+    }
+  },
+  "json_class": "Chef::Role",
+  "chef_type": "role"
+}

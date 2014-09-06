@@ -1,0 +1,11 @@
+{
+  "run_list": [
+    "role[local_ssmtp]",
+    "role[esxi_vm]",
+    "role[default]",
+    "role[server_backuppc]"
+  ],
+  "automatic": {
+    "ipaddress": "phy1mg2"
+  }
+}
