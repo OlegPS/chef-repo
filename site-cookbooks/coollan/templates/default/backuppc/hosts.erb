@@ -1,0 +1,4 @@
+host        dhcp    user    moreUsers     # <--- do not edit this line
+<% node["coollan"]["backuppc"]["hosts"].each do | host | %>
+<%= host["name"] %> <%= host["dhcp"] %> <%= host["user"] %> <%= host["moreUsers"] %>
+<% end %>

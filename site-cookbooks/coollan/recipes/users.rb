@@ -9,27 +9,40 @@ package "sudo" do
   action :install
 end
 
-node["coollan"]["users"]["list"].each do |name, attributes|
-  execute "useradd #{name}" do
-    not_if "grep #{name} /etc/passwd"
-    if "#{attributes["groups"]}".length > 0
-      groups = " -G #{attributes["groups"]}"
-    end
-      command "useradd -g #{attributes["group"]} #{groups} -m -p #{attributes["passwd"]} -s #{attributes["shell"]} -N #{name}"
+package "ruby-shadow" do
+  action :install
+end
+
+node["coollan"]["users"].each do |name, attributes|
+  user "#{name}" do
+    action :create
+    username "#{name}"
+    uid attributes["uid"] if attributes["uid"].is_a? Numeric
+    gid "#{attributes["group"]}"
+    password "#{attributes["password"]}"
+    shell "#{attributes["shell"]}" if !attributes["shell"].to_s.empty?
+    system true if attributes["system"] == true
+    home attributes["home"] if !attributes["home"].to_s.empty?
   end
-end
 
-execute "sudo_alias" do
-  not_if "cat /etc/sudoers | grep 'Cmnd_Alias CHEF_CMNDS '"
-  command "echo 'Cmnd_Alias CHEF_CMNDS = /usr/bin/pacman -S*, /usr/bin/gem, /usr/bin/chef*' >> /etc/sudoers"
-end
+  if "#{attributes["sudo_cmnd_alias"]}".length > 0
+    execute "sudo_alias #{name}" do
+      not_if "cat /etc/sudoers.d/#{name} | grep 'Cmnd_Alias #{attributes["sudo_cmnd_alias"].sub(/=.*/, '')}'"
+      command "echo 'Cmnd_Alias #{attributes["sudo_cmnd_alias"]}' >> /etc/sudoers.d/#{name}"
+    end
+  end
 
-execute "sudo_user" do
-  not_if "cat /etc/sudoers | grep 'chef ALL=(root) NOPASSWD:CHEF_CMNDS'"
-  command "echo 'chef ALL=(root) NOPASSWD:CHEF_CMNDS' >> /etc/sudoers"
-end
+  if "#{attributes["sudo_user"]}".length > 0
+    execute "sudo_user #{name}" do
+      not_if "cat /etc/sudoers.d/#{name} | grep '#{attributes["sudo_user"]}'"
+      command "echo '#{name} #{attributes["sudo_user"]}' >> /etc/sudoers.d/#{name}"
+    end
+  end
 
-execute "sudo_env" do
-  not_if "cat /etc/sudoers | grep 'Defaults:chef '"
-  command "echo 'Defaults:chef setenv' >> /etc/sudoers"
+  if "#{attributes["sudo_setenv"]}" === "yes"
+    execute "sudo_env #{name}" do
+      not_if "cat /etc/sudoers.d/#{name} | grep 'Defaults:#{name} '"
+      command "echo 'Defaults:#{name} setenv' >> /etc/sudoers.d/#{name}"
+    end
+  end
 end

@@ -13,7 +13,10 @@
           {"admin": "75NEKye2eO3M2"}
         ],
         "admin_user_group": "root",
-	"admin_users": "admin"
+	"admin_users": "admin",
+        "hosts": [
+          {"name": "phy1mg2", "user": "backuppc_agent", "dhcp": "0", "moreUsers": ""}
+        ]
       }
     }
   },

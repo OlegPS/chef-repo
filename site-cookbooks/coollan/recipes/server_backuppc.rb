@@ -30,6 +30,11 @@ template "config.pl" do
   source "backuppc/config.pl.erb"
 end
 
+template "hosts" do
+  path "/etc/backuppc/hosts"
+  source "backuppc/hosts.erb"
+end
+
 cookbook_file "wrapper_BackupPC_Admin" do
   action :create_if_missing
   source "backuppc/wrapper_BackupPC_Admin"
@@ -43,6 +48,23 @@ group "backuppc" do
   action :modify
   members "http"
   append true
+end
+
+execute 'ssh-keygen' do
+  not_if "[ -f /etc/backuppc/id_rsa.pub ] && echo exists"
+  user 'backuppc'
+  command 'ssh-keygen -t rsa -q -f /etc/backuppc/id_rsa -P ""'
+  notifies :run, "ruby_block[ssh-copy-id]"
+end
+
+ruby_block "ssh-copy-id" do
+  action :nothing
+  block do
+    node["coollan"]["backuppc"]["hosts"].each do | host |
+      `sudo cat /etc/backuppc/id_rsa.pub | ssh -o "StrictHostKeyChecking no" #{node[:current_user]}@#{host["name"]} 'cat >> /home/#{host["user"]}/.ssh/authorized_keys'`
+    end
+  end
+  subscribes :run, "template[hosts]", :delayed
 end
 
 service "fcgiwrap.socket" do

@@ -5,25 +5,6 @@
     "recipe[coollan]"
   ],
   "default_attributes": {
-    "coollan": {
-      "users": {
-        "list": {
-          "oleg": {
-            "passwd": "MY4awl8r1dyIc",
-            "group": "users",
-            "groups": "",
-            "shell": "/bin/bash"
-          }
-        }
-      },
-      "munin-node": {
-        "plugin": [ "cpu", "memory", "df" ],
-        "allow": [ "95.84.136.90", "192.168.64.104" ]
-      },
-      "webmin": {
-        "allow": [ "95.84.136.90", "192.168.64.150" ]
-      }
-    }
   },
   "override_attributes": {
   },
