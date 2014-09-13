@@ -58,7 +58,7 @@ $Conf{BlackoutPeriods} = [
     },
 ];
 $Conf{BackupZeroFilesIsFatal} = 1;
-$Conf{XferMethod} = 'smb';
+$Conf{XferMethod} = 'rsync';
 $Conf{XferLogLevel} = 1;
 $Conf{ClientCharset} = '';
 $Conf{ClientCharsetLegacy} = 'utf-8';
@@ -85,10 +85,12 @@ $Conf{TarClientRestoreCmd} = '$sshPath -q -x -l root $host'
 		   . ' env LC_ALL=C $tarPath -x -p --numeric-owner --same-owner'
 		   . ' -v -f - -C $shareName+';
 $Conf{TarClientPath} = '/usr/bin/tar';
-$Conf{RsyncClientPath} = '';
-$Conf{RsyncClientCmd} = '$sshPath -l backuppc_agent -i /etc/backuppc/id_rsa $host nice -n 19 sudo $rsyncPath $argList+';
-$Conf{RsyncClientRestoreCmd} = '$sshPath -q -x -l root $host $rsyncPath $argList+';
-$Conf{RsyncShareName} = '/';
+$Conf{RsyncClientPath} = '/usr/bin/rsync';
+$Conf{RsyncClientCmd} = '$sshPath -o StrictHostKeychecking=no -q -x -l service -i /etc/backuppc/id_rsa $host nice -n 19 sudo $rsyncPath $argList+';
+$Conf{RsyncClientRestoreCmd} = '$sshPath -o StrictHostKeychecking=no -q -x -l service -i /etc/backuppc/id_rsa $host $rsyncPath $argList+';
+$Conf{RsyncShareName} = [
+'<%= node["coollan"]["backuppc"]["backup"]["from"].join("','") %>'
+];
 $Conf{RsyncdClientPort} = 873;
 $Conf{RsyncdUserName} = '';
 $Conf{RsyncdPasswd} = '';
@@ -170,7 +172,7 @@ $Conf{PingPath} = '/usr/bin/ping';
 $Conf{PingCmd} = '$pingPath -c 1 $host';
 $Conf{PingMaxMsec} = 20;
 $Conf{CompressLevel} = 5;
-$Conf{ClientTimeout} = 72000;
+$Conf{ClientTimeout} = 60;
 $Conf{MaxOldPerPCLogFiles} = 12;
 $Conf{DumpPreUserCmd}     = undef;
 $Conf{DumpPostUserCmd}    = undef;

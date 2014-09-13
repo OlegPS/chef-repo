@@ -24,6 +24,14 @@ if node["coollan"]["munin-node"]["plugin"].include? 'df'
     source "munin-node/df.conf.erb"
   end
 end
+if node["coollan"]["munin-node"]["plugin"].include? 'arch_maintenance'
+  template "arch_maintenance" do
+    path "/usr/lib/munin/plugins/arch_maintenance"
+    source "munin-node/arch_maintenance.erb"
+    mode 0755
+    notifies :restart, "service[munin-node]", :delayed
+  end
+end
 
 # Add plugins
 node["coollan"]["munin-node"]["plugin"].each do | plugin |

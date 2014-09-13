@@ -14,6 +14,9 @@ end
 package "fcgiwrap" do
   action :install
 end
+package "nfs-utils" do
+  action :install
+end
 
 package "backuppc" do
   action :install
@@ -61,10 +64,17 @@ ruby_block "ssh-copy-id" do
   action :nothing
   block do
     node["coollan"]["backuppc"]["hosts"].each do | host |
-      `sudo cat /etc/backuppc/id_rsa.pub | ssh -o "StrictHostKeyChecking no" #{node[:current_user]}@#{host["name"]} 'cat >> /home/#{host["user"]}/.ssh/authorized_keys'`
+#      `sudo cat /etc/backuppc/id_rsa.pub | ssh -o "StrictHostKeyChecking no" #{node[:current_user]}@#{host["name"]} 'cat >> /home/#{host["user"]}/.ssh/authorized_keys'`
     end
   end
   subscribes :run, "template[hosts]", :delayed
+end
+
+mount "/var/lib/backuppc" do
+  device "#{node["coollan"]["backuppc"]["backup"]["device"]}"
+  fstype "#{node["coollan"]["backuppc"]["backup"]["fstype"]}"
+  options "rw"
+  action [:mount, :enable]
 end
 
 service "fcgiwrap.socket" do

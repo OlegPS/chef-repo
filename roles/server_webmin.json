@@ -2,7 +2,7 @@
   "name": "server_webmin",
   "description": "This is role for webmin server.",
   "run_list": [
-    "recipe[coollan::server_webmin]"
+    "recipe[coollan::webmin]"
   ],
   "default_attributes": {
   },
