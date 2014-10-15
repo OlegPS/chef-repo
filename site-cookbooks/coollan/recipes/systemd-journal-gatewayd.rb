@@ -9,6 +9,6 @@ package "libmicrohttpd" do
   action :install
 end
 
-service "systemd-journal-gatewayd" do
+service "systemd-journal-gatewayd.socket" do
   action [:start, :enable]
 end

@@ -31,6 +31,11 @@ if node["coollan"]["munin-node"]["plugin"].include? 'arch_maintenance'
     mode 0755
     notifies :restart, "service[munin-node]", :delayed
   end
+  template "arch_maintenance.conf" do
+    path "/etc/munin/plugin-conf.d/arch_maintenance.conf"
+    source "munin-node/arch_maintenance.conf.erb"
+    mode 0644
+  end
 end
 
 # Add plugins
