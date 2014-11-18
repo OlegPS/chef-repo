@@ -9,6 +9,14 @@ package "nginx" do
   action :install
 end
 
+package "php" do
+  action :install
+end
+
+package "php-fpm" do
+  action :install
+end
+
 directory "/etc/nginx/vhosts" do
   owner "root"
   group "root"

@@ -1,0 +1,14 @@
+{
+  "name": "phy1we2d",
+
+  "run_list": [
+    "role[local_ssmtp]",
+    "role[esxi_vm]",
+    "role[default]",
+    "recipe[coollan::server_nginx]"
+  ],
+
+  "automatic": {
+    "ipaddress": "phy1we2d"
+  }
+}
