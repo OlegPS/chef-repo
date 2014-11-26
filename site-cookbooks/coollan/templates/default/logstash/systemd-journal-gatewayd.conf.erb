@@ -23,7 +23,7 @@ filter {
 }
 
 output {
-  elasticsearch {
+  elasticsearch_http {
     host => "<%= node["coollan"]["logstash"]["elasticsearch_host"] %>"
   }
 }

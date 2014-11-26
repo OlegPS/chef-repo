@@ -29,6 +29,10 @@ template "nginx.conf" do
   source "nginx/nginx.conf.erb"
 end
 
+service "php-fpm" do
+  action [:start, :enable]
+end
+
 service "nginx" do
   action [:start, :enable]
   subscribes :restart, "template[nginx.conf]", :immediately
