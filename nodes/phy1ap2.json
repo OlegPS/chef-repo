@@ -7,5 +7,9 @@
   ],
   "automatic": {
     "ipaddress": "phy1ap2"
+  },
+
+  "default[coollan][munin-node][plugin][proc]": {
+        "env.procname": "crond|dhcpcd|ntpd|systemd-journal-gatewayd|systemd-journald|java"
   }
 }

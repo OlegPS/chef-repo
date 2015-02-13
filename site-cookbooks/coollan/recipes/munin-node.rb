@@ -18,13 +18,22 @@ template "munin-node.conf" do
 end
 
 # Plugins config
-if node["coollan"]["munin-node"]["plugin"].include? 'df'
+if node["coollan"]["munin-node"]["plugins"].include? 'df'
   template "df.conf" do
     path "/etc/munin/plugin-conf.d/df.conf"
     source "munin-node/df.conf.erb"
   end
 end
-if node["coollan"]["munin-node"]["plugin"].include? 'arch_maintenance'
+
+if node["coollan"]["munin-node"]["plugins"].include? 'proc'
+  template "proc.conf" do
+#    action :create_if_missing
+    path "/etc/munin/plugin-conf.d/proc.conf"
+    source "munin-node/proc.conf.erb"
+  end
+end
+
+if node["coollan"]["munin-node"]["plugins"].include? 'arch_maintenance'
   template "arch_maintenance" do
     path "/usr/lib/munin/plugins/arch_maintenance"
     source "munin-node/arch_maintenance.erb"
@@ -39,7 +48,7 @@ if node["coollan"]["munin-node"]["plugin"].include? 'arch_maintenance'
 end
 
 # Add plugins
-node["coollan"]["munin-node"]["plugin"].each do | plugin |
+node["coollan"]["munin-node"]["plugins"].each do | plugin |
   execute "plugin_#{plugin}" do
     command "ln -s '/usr/lib/munin/plugins/#{plugin}' '/etc/munin/plugins/#{plugin}'"
     not_if "[ -f /etc/munin/plugins/#{plugin} ] && echo '1'"

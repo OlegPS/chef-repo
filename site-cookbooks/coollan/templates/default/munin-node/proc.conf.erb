@@ -1,0 +1,9 @@
+[proc]
+user root
+<% node["coollan"]["munin-node"]["plugin"]["proc"].each do | key, value | %>
+<%= key %> <%= value %>
+<% end %>
+#env.procargs
+#env.procuser
+env.procaspect cpu|memory|processes
+env.category Processes

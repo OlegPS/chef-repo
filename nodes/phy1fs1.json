@@ -9,5 +9,9 @@
 
   "automatic": {
     "ipaddress": "phy1fs1"
+  },
+
+  "default[coollan][munin-node][plugin][proc]": {
+        "env.procname": "crond|dhcpcd|ntpd|systemd-journal-gatewayd|systemd-journald|smbd|nmbd|nfsd|bftpd"
   }
 }

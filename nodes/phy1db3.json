@@ -1,5 +1,5 @@
 {
-  "name": "phy1we1",
+  "name": "phy1db3",
 
   "run_list": [
     "role[local_ssmtp]",
@@ -8,10 +8,10 @@
   ],
 
   "automatic": {
-    "ipaddress": "phy1we1"
+    "ipaddress": "phy1db3"
   },
 
   "default[coollan][munin-node][plugin][proc]": {
-        "env.procname": "crond|dhcpcd|ntpd|systemd-journal-gatewayd|systemd-journald|nginx|php-fpm"
+        "env.procname": "crond|dhcpcd|ntpd|systemd-journal-gatewayd|systemd-journald|postgres"
   }
 }

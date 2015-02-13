@@ -25,7 +25,8 @@
           {"name": "phy1mo1", "user": "service", "dhcp": "0", "moreUsers": ""},
           {"name": "phy1mx1", "user": "service", "dhcp": "0", "moreUsers": ""},
           {"name": "phy1px1", "user": "service", "dhcp": "0", "moreUsers": ""},
-          {"name": "phy1we1", "user": "service", "dhcp": "0", "moreUsers": ""}
+          {"name": "phy1we1", "user": "service", "dhcp": "0", "moreUsers": ""},
+          {"name": "phy1we2d", "user": "service", "dhcp": "0", "moreUsers": ""}
         ]
       }
     }

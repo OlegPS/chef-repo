@@ -13,9 +13,9 @@ if [ "$1" == "config" ]; then
   echo "journal_errors.warning :0"
   echo "journal_errors.info Look for high priority errors in the systemd journal"
 
-  echo "installed_packages.label Installed packages"
-  echo "installed_packages.warning :400"
-  echo "installed_packages.info Installed packages count"
+  echo "installed_packages.label Installed packages decade"
+  echo "installed_packages.warning :40"
+  echo "installed_packages.info Installed packages decade count"
 
   echo "updated_days.label Last update age"
   echo "updated_days.warning :30"
@@ -26,5 +26,5 @@ fi
 
 echo failed_services.value `systemctl --failed | awk '/loaded units listed/{print $1}'`
 echo journal_errors.value $(($(journalctl -p 0..2 -b --since="`date +'%Y-%m-%d %H:%M:%S' -d '5 min ago'`" | wc -l)-1))
-echo installed_packages.value `pacman -Qq | wc -l`
+echo installed_packages.value $(( `pacman -Qq | wc -l` / 10))
 echo updated_days.value $(((`date +%s` - $(date -d `grep 'pacman -S*u' /var/log/pacman.log | tail -n1 | awk '{print substr($1,2)}'` +%s))/60/60/24))
