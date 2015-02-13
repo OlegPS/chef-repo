@@ -9,7 +9,13 @@
     "ipaddress": "mail.itmood.ru"
   },
 
-  "default[coollan][munin-node][plugin][proc]": {
-        "env.procname": "crond|dhcpcd|ntpd|systemd-journal-gatewayd|systemd-journald|master|nginx"
+  "coollan": {
+    "munin-node": {
+      "plugin": {
+        "proc": {
+          "env.procname": "crond|dhcpcd|ntpd|systemd-journal-gatewayd|systemd-journald|master|nginx"
+        }
+      }
+    }
   }
 }

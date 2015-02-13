@@ -22,6 +22,7 @@ if node["coollan"]["munin-node"]["plugins"].include? 'df'
   template "df.conf" do
     path "/etc/munin/plugin-conf.d/df.conf"
     source "munin-node/df.conf.erb"
+    notifies :restart, "service[munin-node]", :delayed
   end
 end
 
@@ -30,6 +31,7 @@ if node["coollan"]["munin-node"]["plugins"].include? 'proc'
 #    action :create_if_missing
     path "/etc/munin/plugin-conf.d/proc.conf"
     source "munin-node/proc.conf.erb"
+    notifies :restart, "service[munin-node]", :delayed
   end
 end
 
@@ -43,6 +45,7 @@ if node["coollan"]["munin-node"]["plugins"].include? 'arch_maintenance'
   template "arch_maintenance.conf" do
     path "/etc/munin/plugin-conf.d/arch_maintenance.conf"
     source "munin-node/arch_maintenance.conf.erb"
+    notifies :restart, "service[munin-node]", :delayed
     mode 0644
   end
 end

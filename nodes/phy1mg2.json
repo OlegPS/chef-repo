@@ -9,7 +9,13 @@
     "ipaddress": "phy1mg2"
   },
 
-  "default[coollan][munin-node][plugin][proc]": {
-        "env.procname": "crond|dhcpcd|ntpd|systemd-journal-gatewayd|systemd-journald|nginx|php-fpm|perl"
+  "coollan": {
+    "munin-node": {
+      "plugin": {
+        "proc": {
+          "env.procname": "crond|dhcpcd|ntpd|systemd-journal-gatewayd|systemd-journald|nginx|php-fpm|perl"
+        }
+      }
+    }
   }
 }
