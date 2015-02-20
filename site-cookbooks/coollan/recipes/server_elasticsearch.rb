@@ -21,6 +21,12 @@ template "elasticsearch.yml" do
   notifies :restart, "service[elasticsearch]", :delayed
 end
 
+template "default-mapping.json" do
+  path "/etc/elasticsearch/default-mapping.json"
+  source "elasticsearch/default-mapping.json.erb"
+  notifies :restart, "service[elasticsearch]", :delayed
+end
+
 service "elasticsearch" do
   action [:start, :enable]
 end

@@ -10,12 +10,14 @@
     "coollan": {
       "logstash": {
         "elasticsearch_host": "phy1ap2.local",
-	"collect_interval": "180",
+	"collect_interval": "60",
 	"collect_from": [ 
+          "phy1ap1",
           "phy1ap2",
           "phy1ap3",
           "phy1db1",
           "phy1db2",
+          "phy1db3",
           "phy1fs1",
           "phy1mg1",
           "phy1mg2",

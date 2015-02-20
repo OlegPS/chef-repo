@@ -1,0 +1,10 @@
+{
+    "_default_": {
+        "_all": { "enabled": false },
+        "_source": { "compress": true },
+         "properties" : {
+            "@timestamp" : { "type" : "date", "index" : "not_analyzed" },
+            "_CMDLINE" : { "type" : "string", "index" : "not_analyzed" }
+        }
+    }
+}

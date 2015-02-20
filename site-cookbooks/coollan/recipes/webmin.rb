@@ -17,6 +17,13 @@ end
 template "miniserv.conf" do
   path "/etc/webmin/miniserv.conf"
   source "webmin/miniserv.conf.erb"
+  notifies :restart, "service[webmin]", :delayed
+end
+
+template "system-status-config" do
+  path "/etc/webmin/system-status/config"
+  source "webmin/system-status-config.erb"
+  notifies :restart, "service[webmin]", :delayed
 end
 
 service "webmin" do
